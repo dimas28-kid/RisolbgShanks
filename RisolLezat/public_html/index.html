@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Penjualan Risol</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 2.8rem;
+        }
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: #34495e;
+            margin: 25px 0 15px;
+            font-weight: 600;
+            font-size: 1.6rem;
+        }
+        .gambar-risol {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .gambar-risol img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            padding: 14px;
+            margin-bottom: 18px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #2980b9;
+            outline: none;
+            background-color: #ecf6fc;
+        }
+        button {
+            padding: 14px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #1c5980;
+        }
+        #hasil {
+            margin-top: 25px;
+            padding: 18px;
+            background-color: #d6eaf8;
+            border: 2px solid #85c1e9;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .kontak {
+            margin-top: 25px;
+            padding: 18px;
+            background-color: #d4efdf;
+            border: 2px solid #82ca9d;
+            border-radius: 8px;
+        }
+        .kontak a {
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .kontak a:hover {
+            text-decoration: underline;
+        }
+        /* Form Pembayaran */
+        .form-pembayaran {
+            margin-top: 30px;
+        }
+        #infoTransfer {
+            margin-top: 10px;
+            display: none;
+        }
+        .rekening-penjual {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Penjualan Risol</h2>
+
+        <!-- Gambar Risol -->
+        <div class="gambar-risol">
+            <img src="RisolMayoLezat.jpeg" alt="Risol Lezat" />
+        </div>
+
+        <form id="formRisol">
+            <label for="nama">Nama Pemesan:</label>
+            <input type="text" id="nama" required />
+
+            <label for="rasa">Pilih Rasa:</label>
+            <select id="rasa" required>
+                <option value="">-- Pilih Rasa --</option>
+                <option value="original">Original</option>
+                <option value="pedas">Pedas</option>
+            </select>
+
+            <label for="jumlah">Jumlah Risol:</label>
+            <input type="number" id="jumlah" min="1" required />
+
+            <!-- Form Pembayaran -->
+            <div class="form-pembayaran">
+                <h3>Pembayaran</h3>
+                <label for="metodePembayaran">Metode Pembayaran:</label>
+                <select id="metodePembayaran" required>
+                    <option value="">-- Pilih Metode Pembayaran --</option>
+                    <option value="transfer">Transfer Bank</option>
+                    <option value="cod">Cash on Delivery (COD)</option>
+                </select>
+
+                <div id="infoTransfer">
+                    <label for="noRekening">Nomor Rekening Pengirim:</label>
+                    <input type="text" id="noRekening" placeholder="Masukkan nomor rekening" />
+                </div>
+
+                <!-- Informasi Nomor Rekening Penjual -->
+                <div class="rekening-penjual">
+                    <strong>Nomor Rekening Penjual:</strong> 0135-0108-5103-509 (Bank BRI)
+                </div>
+            </div>
+
+            <button type="submit">Hitung Total</button>
+        </form>
+
+        <div id="hasil" style="display:none;">
+            <p id="output"></p>
+        </div>
+
+        <div class="kontak">
+            <h3>Kontak Penjual</h3>
+            <p>Instagram: <a href="https://www.instagram.com/mayolezat_?igsh=djRuOXY5ODJ5YXI=" target="_blank">@mayolezat</a></p>
+            <p>WhatsApp: <a href="https://wa.me/6281269168254" target="_blank">+62 812-6916-8254</a></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("formRisol");
+        const hasil = document.getElementById("hasil");
+        const output = document.getElementById("output");
+        const metodePembayaran = document.getElementById("metodePembayaran");
+        const infoTransfer = document.getElementById("infoTransfer");
+
+        const hargaOriginal = 5000;
+        const hargaPedas = 5500;
+
+        // Tampilkan/hidden input nomor rekening sesuai metode pembayaran
+        metodePembayaran.addEventListener("change", () => {
+            if (metodePembayaran.value === "transfer") {
+                infoTransfer.style.display = "block";
+                document.getElementById("noRekening").setAttribute("required", "required");
+            } else {
+                infoTransfer.style.display = "none";
+                document.getElementById("noRekening").removeAttribute("required");
+            }
+        });
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const nama = document.getElementById("nama").value.trim();
+            const rasa = document.getElementById("rasa").value;
+            const jumlah = parseInt(document.getElementById("jumlah").value);
+            const metode = metodePembayaran.value;
+            const rekening = document.getElementById("noRekening").value.trim();
+
+            if (!nama || !rasa || jumlah <= 0) {
+                alert("Pesanan tidak valid. Silakan periksa kembali.");
+                return;
+            }
+
+            if (!metode) {
+                alert("Silakan pilih metode pembayaran.");
+                return;
+            }
+
+            if (metode === "transfer" && rekening === "") {
+                alert("Silakan isi nomor rekening pengirim.");
+                return;
+            }
+
+            let hargaPerItem = 0;
+            if (rasa === "original") {
+                hargaPerItem = hargaOriginal;
+            } else if (rasa === "pedas") {
+                hargaPerItem = hargaPedas;
+            }
+
+            const total = hargaPerItem * jumlah;
+
+            output.innerHTML = `
+                Terima kasih, <strong>${nama}</strong>!<br>
+                Anda memesan <strong>${jumlah}</strong> risol rasa <strong>${rasa}</strong>.<br>
+                Total harga: <strong>Rp ${total.toLocaleString('id-ID')}</strong>.<br>
+                Metode pembayaran: <strong>${metode === 'transfer' ? 'Transfer Bank' : 'Cash on Delivery (COD)'}</strong>.
+                ${metode === 'transfer' ? `<br>Nomor rekening pengirim: <strong>${rekening}</strong>` : ''}
+            `;
+            hasil.style.display = "block";
+
+            
+            const nomorPemilik = "6281269168254";
+            const pesanWA = encodeURIComponent(
+                `Pesanan baru dari ${nama}:\n` +
+                `Rasa: ${rasa}\n` +
+                `Jumlah: ${jumlah}\n` +
+                `Total harga: Rp ${total.toLocaleString('id-ID')}\n` +
+                `Metode Pembayaran: ${metode === 'transfer' ? 'Transfer Bank' : 'COD'}\n` +
+                (metode === 'transfer' ? `No. Rekening Pengirim: ${rekening}\n` : '')
+            );
+
+            
+            const waLink = `https://wa.me/${nomorPemilik}?text=${pesanWA}`;
+            window.open(waLink, '_blank'); 
+        });
+    </script>
+</body>
+</html>
